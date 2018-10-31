@@ -61,7 +61,7 @@ defmodule Bamboo.MailerTest do
     Mailer.deliver_later(email)
 
     assert_receive {:deliver, delivered_email, _config}
-    assert delivered_email == Bamboo.Mailer.normalize_addresses(email)
+    assert delivered_email == Bamboo.Mailer.normalize_addresses(email) |> Bamboo.Mailer.clean_assigns()
   end
 
   test "deliver_now/1 wraps the recipients in a list" do
@@ -95,7 +95,7 @@ defmodule Bamboo.MailerTest do
 
     returned_email = Mailer.deliver_now(email)
 
-    assert returned_email == Bamboo.Mailer.normalize_addresses(email)
+    assert returned_email == Bamboo.Mailer.normalize_addresses(email) |> Bamboo.Mailer.clean_assigns()
     assert_received {:deliver, %Bamboo.Email{}, ^expected_final_config}
   end
 
