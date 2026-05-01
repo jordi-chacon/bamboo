@@ -33,7 +33,7 @@ defmodule Bamboo.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [
-      applications: [:logger, :hackney],
+      applications: [:logger, :hackney, :plug],
       mod: {Bamboo, []}
     ]
   end
